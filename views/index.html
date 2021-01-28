@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
@@ -24,7 +25,11 @@
         ${navigation}
     </div>
     <div class="container w-75 m-auto">
+        
         <div class="row d-flex align-content-between flex-wrap pt-5">
+            <div class="container p-5"> 
+                <a href="/newMovie" class="btn btn-primary" id="addMovie">Add Movie</a>
+            </div>
             ${movies.map(movie => `
             <div class="card m-3" style="width: 18rem;">
                 <img src="${movie.image}" class="card-img-top" alt="${movie.title}">
@@ -50,8 +55,10 @@
                         </div>
                         <div class="modal-footer bg-light">
                             <button type="button" class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal" id="${movie.id}_delete">Delete</button>
+                            <button type="button" class="btn btn-outline-secondary"
                                 data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Delete</button>
+                                <button type="button" class="btn btn-primary" id="${movie.id}_favourite">Favourite</button>
                         </div>
                     </div>
                 </div>

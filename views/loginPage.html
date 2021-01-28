@@ -25,15 +25,15 @@
     </div>
     <div class="container pt-5">
         <div class="container-fluid d-flex justify-content-center pt-5">
-            <form>
+            <form method="POST" action="/login">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <label for="userNameInput" class="form-label">UserName</label>
+                    <input required type="text" class="form-control" id="userNameInput" name="username" aria-describedby="userHelpMessage">
+                    <div id="userHelpMessage" class="form-text">We'll never share your information with anyone else.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="userPasswordInput" class="form-label">Password</label>
+                    <input required type="password" class="form-control" name="password" id="userPasswordInput">
                 </div>
                 <button type="submit" class="btn btn-primary container-fluid">Submit</button>
             </form>

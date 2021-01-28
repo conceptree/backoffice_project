@@ -1,28 +1,21 @@
 const components = require("./components");
-const mysql = require("mysql");
 const bcrypt = require("bcrypt");
+const tables = require("../sequelize");
+const passport = require("passport");
+const { report } = require("../router");
+const User = tables[0];
+const Favourites = tables[2];
+const Movies = tables[1];
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'sqladmin',
-    database: 'octodb'
-  });
-
-db.connect((err) => {
-    if (err) throw err;
-        console.log('Connected!');
-});
-
+/// VIEWS CONTROLLERS
 exports.renderHomePage = (req, res) => {
-    const query = "SELECT * FROM movies";
-    db.query(query, (error, result)=>{
+    Movies.findAll().then((movies) => {
         res.render("index", {
             locals: {
                 title: 'OctoMovies | Backoffice',
                 navigation:components.navigation(),
                 footer:components.footer(),
-                movies:result
+                movies:movies
             }
         });
     });
@@ -42,16 +35,6 @@ exports.renderRegisterPage = (req, res) => {
     res.render("registrationPage", {
         locals: {
             title: 'OctoMovies | Register',
-            navigation:components.navigation(),
-            footer:components.footer()
-        }
-    });
-};
-
-exports.renderMoviesPage = (req, res) => {
-    res.render("movies", {
-        locals: {
-            title: 'OctoMovies | Movies',
             navigation:components.navigation(),
             footer:components.footer()
         }
@@ -78,17 +61,99 @@ exports.renderAccountPage = (req, res) => {
     });
 };
 
-exports.register = async (req, res) => {
-    console.log(req);
-    try{
-        const user = {
-            name:req.body.name,
-            email:req.body.email,
-            password: await bcrypt.hash(req.body.password, 10)
-        };
-        const sql =  "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        db.query(sql, user.name, user.email, user.password);
-    }catch{
-        console.log("error");
-    }
+exports.renderNewMoviePage = (req, res) => {
+    res.render("newMovie", {
+        locals: {
+            title: 'OctoMovies | New Movie',
+            navigation:components.navigation(),
+            footer:components.footer()
+        }
+    });
 };
+
+// SESSION CONTROLLERS
+exports.setupAdmin = async function (req, res){
+    
+    User.findOne().then( (user)=>{
+        console.log(user);
+        if(user){
+            res.redirect('/login');
+            return;
+        }
+        console.log("does not exists");
+    
+        bcrypt.genSalt(10, function(err, salt){
+            if(err) return next(err);
+            bcrypt.hash("admin", salt, function(err, hash){
+                if(err) return next();
+
+                User.create({
+                    email: "lc@xpto.pt",
+                    username: "admin",
+                    password: hash,
+                  }).then((user) => {
+                    res.redirect("/login");
+                  });
+
+            });
+        });
+    });  
+};
+
+/// REST
+exports.setFavourite = (req, res)=>{
+    
+};
+
+exports.setMovie = (req, res)=>{
+    console.log(req.body);
+    Movies.create({
+        title:req.body.title,
+        description:req.body.description,
+        image:req.body.image
+    }).then(movie => {
+        res.redirect("/");
+    });
+};
+
+exports.deleteMovie = (req, res)=>{
+   Movies.destroy({where:{id:req.body.id}}).then(message => {
+    res.redirect("/login");
+   });
+};
+
+exports.setUser = (req, res)=>{
+    User.findOne({where:{
+        username:req.body.username
+    }}).then( (user)=>{
+        console.log(user);
+        if(user){
+            res.send('User Already exists!');
+            return;
+        }
+        console.log("does not exists");
+    
+        bcrypt.genSalt(10, function(err, salt){
+            if(err) return next(err);
+            bcrypt.hash(req.body.password, salt, function(err, hash){
+                if(err) return next();
+
+                User.create({
+                    email: req.body.username,
+                    username: req.body.username,
+                    password: hash,
+                  }).then((user) => {
+                    res.redirect("/login");
+                  });
+
+            });
+        });
+    });  
+};
+
+exports.logUser = (req, res)=>{
+
+
+    
+};
+
