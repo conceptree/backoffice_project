@@ -21,53 +21,54 @@
 </head>
 
 <body>
-    <div class="container-fluid fixed-top">
-        ${navigation}
-    </div>
-    <div class="container w-75 m-auto">
-        
-        <div class="row d-flex align-content-between flex-wrap pt-5">
-            <div class="container p-5"> 
-                <a href="/newMovie" class="btn btn-primary" id="addMovie">Add Movie</a>
+    <div class="container-flui bg-container">
+        <div class="container-fluid fixed-top">
+            ${navigation}
+        </div>
+        <div class="container-fluid w-75 m-auto p-5">
+            <div class="container-fluid p-5">
+                <a href="/newMovie" class="btn btn-primary container-fluid" id="addMovie">Add Movie</a>
             </div>
-            ${movies.map(movie => `
-            <div class="card m-3" style="width: 18rem;">
-                <img src="${movie.image}" class="card-img-top" alt="${movie.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${movie.title}</h5>
-                    <p class="card-text">${movie.description}</p>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#movie_${movie.id}"
-                        class="btn btn-primary">Details</a>
+            <div class="container d-flex justify-content-start align-content-between flex-wrap">
+                
+                ${movies.map(movie => `
+                <div class="card m-3" style="width: 18rem;">
+                    <img src="${movie.image}" class="card-img-top" alt="${movie.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.title}</h5>
+                        <p class="card-text" style="height:100px; overflow: auto;">${movie.description}</p>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#movie_${movie.id}"
+                            class="align-bottom btn btn-primary">Details</a>
+                    </div>
                 </div>
-            </div>
-            <div class="modal fade pt-5" id="movie_${movie.id}" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable pt-5" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-light">
-                            <h5 class="modal-title" id="exampleModalLabel">${movie.title}</h5>
-                        </div>
-                        <div class="modal-body">
-                            <img class="card-img-top" src="${movie.image}" alt="Card image cap">
-                            <div class="container pt-3">
-                                ${movie.description}
+                <div class="modal fade pt-5" id="movie_${movie.id}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable pt-5" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-light">
+                                <h5 class="modal-title" id="exampleModalLabel">${movie.title}</h5>
                             </div>
-                        </div>
-                        <div class="modal-footer bg-light">
-                            <button type="button" class="btn btn-outline-secondary"
-                            data-bs-dismiss="modal" id="${movie.id}_delete">Delete</button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="${movie.id}_favourite">Favourite</button>
+                            <div class="modal-body">
+                                <img class="card-img-top" src="${movie.image}" alt="Card image cap">
+                                <div class="container pt-3">
+                                    ${movie.description}
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                                    id="${movie.id}_delete">Delete</button>
+                                <button type="button" class="btn btn-primary"
+                                    data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                `).join('')}
             </div>
-            `).join('')}
         </div>
-    </div>
-    <div class="container-fluid fixed-bottom">
-        ${footer}
+        <div class="container-fluid fixed-bottom">
+            ${footer}
+        </div>
     </div>
 </body>
 

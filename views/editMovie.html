@@ -20,32 +20,32 @@
 </head>
 
 <body>
-    <div class="container-fluid fixed-top">
-        ${navigation}
-    </div>
-    <div class="container-fluid">
-        <div class="container pt-5">
-            <div class="container-fluid d-flex justify-content-center flex-column pt-5">
-                <h1 class="row align-self-center">USER DETAILS</h1>
-                <form id="updateUserForm" method="PUT" action="/account">
+    <div class="container-fluid bg-container">
+        <div class="container-fluid fixed-top">
+            ${navigation}
+        </div>
+        <div class="container-fluid pt-5">
+            
+            <div class="container-fluid d-flex justify-content-center pt-5">
+                
+                <form class="row">
+                    <h1>${movie.title}</h1>
                     <div class="mb-3">
-                        <label for="userNameInput" class="form-label">UserName</label>
-                        <input required type="text" class="form-control" id="userNameInput" name="username" value="${user.username}" aria-describedby="userHelpMessage">
-                        <div id="userHelpMessage" class="form-text">We'll never share your information with anyone else.</div>
+                        <input required type="text" class="form-control" placeholder="Title" value="${movie.title}" id="movieNameInput" name="title">
                     </div>
                     <div class="mb-3">
-                        <label for="userPasswordInput" class="form-label">Password</label>
-                        <input required type="password" class="form-control" name="password" value="" id="userPasswordInput">
+                        <textarea required class="form-control" id="movieDescriptionInput" placeholder="Description" value="${movie.description}" name="description" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary container-fluid">Change</button>
-
-                    <a href="/" class="btn btn-outline-primary container-fluid mt-2" container-fluid">Back</a>
+                    <div class="mb-3">
+                        <input required type="text" class="form-control" placeholder="Image" value="${movie.image}" id="movieImageInput" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary container-fluid">Update</button>
                 </form>
             </div>
         </div>
-    </div>
-    <div class="container-fluid fixed-bottom">
-        ${footer}
+        <div class="container-fluid fixed-bottom">
+            ${footer}
+        </div>
     </div>
 </body>
 

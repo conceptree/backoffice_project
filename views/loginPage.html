@@ -24,8 +24,9 @@
         ${navigation}
     </div>
     <div class="container pt-5">
-        <div class="container-fluid d-flex justify-content-center pt-5">
-            <form method="POST" action="/login">
+        <div class="container-fluid d-flex justify-content-center flex-column pt-5">
+            <h1 class="row align-self-center">SINGIN/SINGUP</h1>
+            <form id="loginForm">
                 <div class="mb-3">
                     <label for="userNameInput" class="form-label">UserName</label>
                     <input required type="text" class="form-control" id="userNameInput" name="username" aria-describedby="userHelpMessage">
@@ -36,6 +37,7 @@
                     <input required type="password" class="form-control" name="password" id="userPasswordInput">
                 </div>
                 <button type="submit" class="btn btn-primary container-fluid">Submit</button>
+                <a href="/signUp" class="btn btn-outline-primary container-fluid mt-2">SignUp</a>
             </form>
         </div>
     </div>

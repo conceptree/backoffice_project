@@ -5,6 +5,6 @@ module.exports = (sequelize, type) =>
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: type.INTEGER,
-    movieId: type.INTEGER
+    user_id: type.INTEGER,
+    movie_id: type.INTEGER
    });

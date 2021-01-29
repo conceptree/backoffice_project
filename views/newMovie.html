@@ -20,30 +20,32 @@
 </head>
 
 <body>
-    <div class="container-fluid fixed-top">
-        ${navigation}
-    </div>
-    <div class="container pt-5">
-        <div class="container-fluid d-flex justify-content-center pt-5">
-            <form method="POST" action="/movies">
-                <div class="mb-3">
-                    <label for="movieNameInput" class="form-label">Title</label>
-                    <input required type="text" class="form-control" id="movieNameInput" name="title">
-                </div>
-                <div class="mb-3">
-                    <label for="movieDescriptionInput" class="form-label">Description</label>
-                    <input required type="text" class="form-control" id="movieDescriptionInput" name="description">
-                </div>
-                <div class="mb-3">
-                    <label for="movieImageInput" class="form-label">Image</label>
-                    <input required type="text" class="form-control" id="movieImageInput" name="image">
-                </div>
-                <button type="submit" class="btn btn-primary container-fluid">Create</button>
-            </form>
+    <div class="container-fluid bg-container">
+        <div class="container-fluid fixed-top">
+            ${navigation}
         </div>
-    </div>
-    <div class="container-fluid fixed-bottom">
-        ${footer}
+        <div class="container-fluid pt-5">
+            
+            <div class="container d-flex justify-content-center flex-column pt-5">
+                
+                <form class="row" method="POST" action="/movies">
+                    <h1>Insert New Movie</h1>
+                    <div class="mb-3">
+                        <input required type="text" class="form-control" placeholder="Title" id="movieNameInput" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <textarea required class="form-control" id="movieDescriptionInput" placeholder="Description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <input required type="text" class="form-control" placeholder="Image" id="movieImageInput" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary container-fluid">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid fixed-bottom">
+            ${footer}
+        </div>
     </div>
 </body>
 
